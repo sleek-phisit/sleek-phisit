@@ -2,6 +2,8 @@
 
 import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -29,13 +31,14 @@ export default function LeadForm() {
         return
       }
 
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, captchaToken }),
+      await addDoc(collection(db, 'leads'), {
+        name:      form.name,
+        email:     form.email,
+        phone:     form.phone || null,
+        message:   form.message,
+        source:    'portfolio',
+        createdAt: serverTimestamp(),
       })
-
-      if (!res.ok) throw new Error('Request failed')
 
       setStatus('success')
       setForm({ name: '', email: '', phone: '', message: '' })

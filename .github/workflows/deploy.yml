@@ -17,40 +17,18 @@ jobs:
           node-version: 24
           cache: npm
 
-      # ── Frontend ──────────────────────────────────────────
-      - name: Install frontend dependencies
+      - name: Install dependencies
         run: npm i
 
-      - name: Build frontend
+      - name: Build
         run: npm run build
         env:
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
 
-      # ── Firebase Functions ────────────────────────────────
-      - name: Install functions dependencies
-        run: npm i
-        working-directory: functions
-
-      - name: Build functions
-        run: npm run build
-        working-directory: functions
-
-      - name: Create functions env
-        run: |
-          cat > functions/.env << 'EOF'
-          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SES_REGION=${{ secrets.AWS_SES_REGION }}
-          SES_FROM_EMAIL=${{ secrets.SES_FROM_EMAIL }}
-          SES_TO_EMAIL=${{ secrets.SES_TO_EMAIL }}
-          RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}
-          EOF
-
-      # ── Deploy ────────────────────────────────────────────
-      - name: Set up Firebase credentials
-        run: echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/firebase-sa.json
-
-      - name: Deploy hosting + functions
-        run: npx firebase-tools deploy --only hosting,functions --project phisit-ks
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: /tmp/firebase-sa.json
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: phisit-ks
