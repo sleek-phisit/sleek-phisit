@@ -2,14 +2,10 @@
 
 import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
-import emailjs from '@emailjs/browser'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
-const EMAILJS_SERVICE  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  ?? ''
-const EMAILJS_TEMPLATE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? ''
-const EMAILJS_KEY      = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  ?? ''
-const RECAPTCHA_KEY    = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY  ?? ''
+const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''
 
 export default function LeadForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null)
@@ -25,26 +21,21 @@ export default function LeadForm() {
     setStatus('loading')
 
     try {
-      const token = await recaptchaRef.current?.executeAsync()
+      const captchaToken = await recaptchaRef.current?.executeAsync()
       recaptchaRef.current?.reset()
 
-      if (!token) {
+      if (!captchaToken) {
         setStatus('error')
         return
       }
 
-      await emailjs.send(
-        EMAILJS_SERVICE,
-        EMAILJS_TEMPLATE,
-        {
-          from_name:  form.name,
-          from_email: form.email,
-          phone:      form.phone,
-          message:    form.message,
-          'g-recaptcha-response': token,
-        },
-        EMAILJS_KEY,
-      )
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, captchaToken }),
+      })
+
+      if (!res.ok) throw new Error('Request failed')
 
       setStatus('success')
       setForm({ name: '', email: '', phone: '', message: '' })
@@ -142,7 +133,6 @@ export default function LeadForm() {
         </button>
       </div>
 
-      {/* Invisible reCAPTCHA v2 */}
       {RECAPTCHA_KEY && (
         <ReCAPTCHA
           ref={recaptchaRef}

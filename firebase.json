@@ -8,6 +8,10 @@
     ],
     "rewrites": [
       {
+        "source": "/api/contact",
+        "function": "contactForm"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
@@ -23,5 +27,8 @@
         ]
       }
     ]
+  },
+  "functions": {
+    "source": "functions"
   }
 }
