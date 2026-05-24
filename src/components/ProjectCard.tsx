@@ -1,11 +1,20 @@
+'use client'
+
+import { useInView } from '@/hooks/useInView'
 import { Project } from '@/data/projects'
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project, delay = 0 }: { project: Project; delay?: number }) {
+  const { ref, inView } = useInView()
+
   return (
-    <div className="group relative bg-white border border-surface-border rounded-2xl p-6 hover:border-brand/40 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
+    <div
+      ref={ref}
+      className={`reveal-zoom ${inView ? 'in-view' : ''} group relative bg-white border border-surface-border rounded-2xl p-6 hover:border-brand/40 hover:shadow-md hover:-translate-y-1 transition-all duration-300`}
+      style={{ transitionDelay: inView ? `${delay}ms` : '0ms' }}
+    >
       <div className={`absolute top-0 left-0 right-0 h-px rounded-t-2xl bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
-      <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${project.color} text-xl mb-4`}>
+      <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${project.color} text-xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
         {project.icon}
       </div>
 
@@ -29,10 +38,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       <div className="flex flex-wrap gap-2">
         {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="text-body text-ink-faint bg-surface-DEFAULT border border-surface-border px-2 py-0.5 rounded"
-          >
+          <span key={tag} className="text-body text-ink-faint bg-surface-DEFAULT border border-surface-border px-2 py-0.5 rounded">
             {tag}
           </span>
         ))}

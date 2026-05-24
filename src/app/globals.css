@@ -12,15 +12,9 @@
   --text-muted: #475569;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+* { box-sizing: border-box; padding: 0; margin: 0; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background-color: var(--bg);
@@ -29,20 +23,54 @@ body {
   font-weight: 300;
 }
 
-::selection {
-  background-color: #DBEAFE;
-  color: #1D4ED8;
+::selection { background-color: #DBEAFE; color: #1D4ED8; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── Scroll reveal ────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.reveal-fade.in-view { opacity: 1; }
+
+.reveal-zoom {
+  opacity: 0;
+  transform: scale(0.93);
+  transition: opacity 0.55s ease,
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-zoom.in-view { opacity: 1; transform: scale(1); }
+
+/* ── Hero entry (runs immediately on load) ─────────────────────── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-anim {
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
+/* ── Breathing ─────────────────────────────────────────────────── */
+@keyframes breath {
+  0%, 100% { transform: scale(1);    opacity: 0.9; }
+  50%       { transform: scale(1.06); opacity: 1;   }
 }
+.breath { animation: breath 3.5s ease-in-out infinite; }
 
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
+/* ── Skill bar ─────────────────────────────────────────────────── */
+.skill-bar {
+  width: 0;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
