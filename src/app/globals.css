@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --brand-green: #00E676;
-  --brand-dark: #0A0F0D;
-  --brand-card: #111A14;
-  --brand-border: #1E2D22;
+  --green: #15803D;
+  --green-light: #DCFCE7;
+  --bg: #F7FBF7;
+  --bg-card: #FFFFFF;
+  --border: #D9EAD9;
+  --text: #1A2D1C;
+  --text-muted: #6A8A6C;
 }
 
 * {
@@ -22,29 +23,26 @@ html {
 }
 
 body {
-  background-color: var(--brand-dark);
-  color: #E8F5E9;
-  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-kanit), system-ui, sans-serif;
+  font-weight: 300;
 }
 
 ::selection {
-  background-color: #00E67633;
-  color: #00E676;
+  background-color: #DCFCE7;
+  color: #15803D;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--brand-dark);
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-border);
+  background: var(--border);
   border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #00E676;
 }

@@ -8,31 +8,28 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        brand: {
-          green: '#00E676',
-          dark: '#0A0F0D',
-          card: '#111A14',
-          border: '#1E2D22',
-          muted: '#4A6B52',
-        },
-      },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['var(--font-kanit)', 'system-ui', 'sans-serif'],
       },
-      animation: {
-        'fade-in': 'fadeIn 0.6s ease-out forwards',
-        'slide-up': 'slideUp 0.6s ease-out forwards',
+      fontSize: {
+        body: ['15px', { lineHeight: '1.7' }],
+        heading: ['26px', { lineHeight: '1.3', fontWeight: '400' }],
       },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+      colors: {
+        green: {
+          brand: '#15803D',
+          light: '#DCFCE7',
+          muted: '#BBF7D0',
         },
-        slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        ink: {
+          DEFAULT: '#1A2D1C',
+          muted: '#6A8A6C',
+          faint: '#9DB89E',
+        },
+        surface: {
+          DEFAULT: '#F7FBF7',
+          card: '#FFFFFF',
+          border: '#D9EAD9',
         },
       },
     },

@@ -1,5 +1,13 @@
 import type { Metadata } from 'next'
+import { Kanit } from 'next/font/google'
 import './globals.css'
+
+const kanit = Kanit({
+  weight: ['300', '400'],
+  subsets: ['latin', 'thai'],
+  display: 'swap',
+  variable: '--font-kanit',
+})
 
 export const metadata: Metadata = {
   title: 'Phisit — Sleek EV Portfolio',
@@ -12,13 +20,9 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="th" className="scroll-smooth">
+    <html lang="th" className={kanit.variable}>
       <body className="antialiased">{children}</body>
     </html>
   )
