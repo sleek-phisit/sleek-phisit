@@ -16,20 +16,21 @@ const config: Config = {
         heading: ['26px', { lineHeight: '1.3', fontWeight: '400' }],
       },
       colors: {
-        green: {
-          brand: '#15803D',
-          light: '#DCFCE7',
-          muted: '#BBF7D0',
+        brand: {
+          DEFAULT: '#1D4ED8',
+          light: '#DBEAFE',
+          muted: '#BFDBFE',
+          dark: '#1E40AF',
         },
         ink: {
-          DEFAULT: '#1A2D1C',
-          muted: '#6A8A6C',
-          faint: '#9DB89E',
+          DEFAULT: '#0F172A',
+          muted: '#475569',
+          faint: '#94A3B8',
         },
         surface: {
-          DEFAULT: '#F7FBF7',
+          DEFAULT: '#F8FAFF',
           card: '#FFFFFF',
-          border: '#D9EAD9',
+          border: '#DDEAF8',
         },
       },
     },

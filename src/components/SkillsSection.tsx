@@ -5,7 +5,7 @@ export default function SkillsSection() {
     <section id="skills" className="py-24 px-6 border-t border-surface-border">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
-          <div className="text-body text-green-brand mb-3">03. skills</div>
+          <div className="text-body text-brand mb-3">04. skills</div>
           <h2 className="text-heading text-ink">เทคโนโลยีที่ใช้</h2>
         </div>
 
@@ -14,11 +14,11 @@ export default function SkillsSection() {
             <div key={skill.name}>
               <div className="flex justify-between mb-2">
                 <span className="text-body text-ink">{skill.name}</span>
-                <span className="text-body text-green-brand">{skill.level}%</span>
+                <span className="text-body text-brand">{skill.level}%</span>
               </div>
               <div className="h-1 bg-surface-border rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-green-brand rounded-full"
+                  className="h-full bg-brand rounded-full"
                   style={{ width: `${skill.level}%` }}
                 />
               </div>
@@ -36,7 +36,7 @@ export default function SkillsSection() {
             ].map((tech) => (
               <span
                 key={tech}
-                className="text-body text-ink-muted bg-white border border-surface-border px-3 py-1.5 rounded-lg hover:border-green-brand/40 hover:text-green-brand transition-colors"
+                className="text-body text-ink-muted bg-white border border-surface-border px-3 py-1.5 rounded-lg hover:border-brand/40 hover:text-brand transition-colors"
               >
                 {tech}
               </span>

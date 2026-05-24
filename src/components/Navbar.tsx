@@ -14,6 +14,7 @@ export default function Navbar() {
 
   const links = [
     { href: '#about', label: 'About' },
+    { href: '#experience', label: 'Experience' },
     { href: '#projects', label: 'Projects' },
     { href: '#skills', label: 'Skills' },
     { href: '#contact', label: 'Contact' },
@@ -26,7 +27,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
-        <a href="#" className="text-body text-green-brand font-400 tracking-wide">
+        <a href="#" className="text-body text-brand font-400 tracking-wide">
           phisit<span className="text-ink-muted">@sleek-ev</span>
         </a>
 
@@ -35,7 +36,7 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="text-body text-ink-muted hover:text-green-brand transition-colors duration-200"
+              className="text-body text-ink-muted hover:text-brand transition-colors duration-200"
             >
               {l.label}
             </a>
@@ -43,7 +44,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-ink-muted hover:text-green-brand transition-colors"
+          className="md:hidden text-ink-muted hover:text-brand transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -63,7 +64,7 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="text-body text-ink-muted hover:text-green-brand transition-colors"
+              className="text-body text-ink-muted hover:text-brand transition-colors"
               onClick={() => setMenuOpen(false)}
             >
               {l.label}

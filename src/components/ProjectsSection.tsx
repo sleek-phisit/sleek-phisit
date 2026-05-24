@@ -15,7 +15,7 @@ export default function ProjectsSection() {
     <section id="projects" className="py-24 px-6 border-t border-surface-border">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
-          <div className="text-body text-green-brand mb-3">02. work</div>
+          <div className="text-body text-brand mb-3">03. work</div>
           <h2 className="text-heading text-ink mb-3">โปรเจกต์ที่ Sleek EV</h2>
           <p className="text-body text-ink-muted max-w-xl">
             ผลงานทั้งหมดที่ร่วมพัฒนาที่ Sleek EV ครอบคลุมหลาย domain ตั้งแต่ hardware integration ไปถึง data analytics
@@ -29,8 +29,8 @@ export default function ProjectsSection() {
               onClick={() => setActive(cat)}
               className={`text-body px-4 py-1.5 rounded-full border transition-all duration-200 ${
                 active === cat
-                  ? 'bg-green-brand text-white border-green-brand'
-                  : 'border-surface-border text-ink-muted bg-white hover:border-green-brand/40 hover:text-green-brand'
+                  ? 'bg-brand text-white border-brand'
+                  : 'border-surface-border text-ink-muted bg-white hover:border-brand/40 hover:text-brand'
               }`}
             >
               {cat}

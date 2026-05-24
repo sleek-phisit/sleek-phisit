@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --green: #15803D;
-  --green-light: #DCFCE7;
-  --bg: #F7FBF7;
+  --blue: #1D4ED8;
+  --blue-light: #DBEAFE;
+  --bg: #F8FAFF;
   --bg-card: #FFFFFF;
-  --border: #D9EAD9;
-  --text: #1A2D1C;
-  --text-muted: #6A8A6C;
+  --border: #DDEAF8;
+  --text: #0F172A;
+  --text-muted: #475569;
 }
 
 * {
@@ -30,8 +30,8 @@ body {
 }
 
 ::selection {
-  background-color: #DCFCE7;
-  color: #15803D;
+  background-color: #DBEAFE;
+  color: #1D4ED8;
 }
 
 ::-webkit-scrollbar {
