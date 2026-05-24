@@ -17,20 +17,6 @@ const experiences = [
     ],
     current: true,
   },
-  {
-    company: '1Moby Co., Ltd.',
-    role: 'Senior Software Engineer / Lead',
-    period: '2023 – 2024',
-    location: 'Huay Kwang, Bangkok',
-    type: 'Mobile App & SMS Gateway Platform',
-    responsibilities: [
-      'Led a cross-functional team to design and deliver UniSight platform',
-      'Oversaw sprint planning and tracking; provided real-time dashboards',
-      'Designed and implemented core architecture serving as the foundation for products',
-      'Delivered key platform features: SSO, company management, and CRM integration',
-    ],
-    current: false,
-  },
 ]
 
 export default function ExperienceSection() {
