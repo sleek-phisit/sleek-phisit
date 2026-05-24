@@ -23,12 +23,14 @@ export default function LeadForm() {
     setStatus('loading')
 
     try {
-      const captchaToken = await recaptchaRef.current?.executeAsync()
-      recaptchaRef.current?.reset()
-
-      if (!captchaToken) {
-        setStatus('error')
-        return
+      // reCAPTCHA is optional — skip if site key not configured
+      if (RECAPTCHA_KEY && recaptchaRef.current) {
+        const captchaToken = await recaptchaRef.current.executeAsync()
+        recaptchaRef.current.reset()
+        if (!captchaToken) {
+          setStatus('error')
+          return
+        }
       }
 
       await addDoc(collection(db, 'leads'), {
@@ -42,7 +44,8 @@ export default function LeadForm() {
 
       setStatus('success')
       setForm({ name: '', email: '', phone: '', message: '' })
-    } catch {
+    } catch (err) {
+      console.error('LeadForm error:', err)
       setStatus('error')
     }
   }
