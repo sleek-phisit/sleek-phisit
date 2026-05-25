@@ -9,10 +9,21 @@ type Status = 'idle' | 'loading' | 'success' | 'error'
 
 const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''
 
+const LIMITS = { name: 100, email: 254, phone: 20, message: 1000 }
+
+function sanitize(value: string, max: number) {
+  return value.trim().slice(0, max)
+}
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
 export default function LeadForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null)
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [status, setStatus] = useState<Status>('idle')
+  const [validationError, setValidationError] = useState('')
 
   const set = (field: keyof typeof form) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -20,10 +31,25 @@ export default function LeadForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setValidationError('')
+
+    const name    = sanitize(form.name,    LIMITS.name)
+    const email   = sanitize(form.email,   LIMITS.email)
+    const phone   = sanitize(form.phone,   LIMITS.phone)
+    const message = sanitize(form.message, LIMITS.message)
+
+    if (!name || !email || !message) {
+      setValidationError('กรุณากรอกข้อมูลที่จำเป็นให้ครบ')
+      return
+    }
+    if (!isValidEmail(email)) {
+      setValidationError('รูปแบบอีเมลไม่ถูกต้อง')
+      return
+    }
+
     setStatus('loading')
 
     try {
-      // reCAPTCHA is optional — skip if site key not configured
       if (RECAPTCHA_KEY && recaptchaRef.current) {
         const captchaToken = await recaptchaRef.current.executeAsync()
         recaptchaRef.current.reset()
@@ -34,10 +60,9 @@ export default function LeadForm() {
       }
 
       await addDoc(collection(db, 'leads'), {
-        name:      form.name,
-        email:     form.email,
-        phone:     form.phone || null,
-        message:   form.message,
+        name, email,
+        phone:     phone || null,
+        message,
         source:    'portfolio',
         createdAt: serverTimestamp(),
       })
@@ -122,8 +147,10 @@ export default function LeadForm() {
         />
       </div>
 
-      {status === 'error' && (
-        <p className="text-body text-red-500">เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</p>
+      {(validationError || status === 'error') && (
+        <p className="text-body text-red-500">
+          {validationError || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'}
+        </p>
       )}
 
       <div className="flex items-center justify-between gap-4">
