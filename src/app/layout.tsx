@@ -21,6 +21,16 @@ export const metadata: Metadata = {
   title: 'Phisit — Sleek EV Portfolio',
   description: 'Portfolio of work done at Sleek EV — IoT, Mobile, Web, Finance, Fleet Management & Insights',
   keywords: ['portfolio', 'sleek ev', 'electric vehicle', 'iot', 'react native', 'nextjs'],
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Phisit Portfolio',
+  },
+  icons: {
+    apple: '/icons/apple-touch-icon.png',
+    icon: '/icons/icon-192.png',
+  },
   openGraph: {
     title: 'Phisit — Sleek EV Portfolio',
     description: 'Portfolio of work done at Sleek EV',
