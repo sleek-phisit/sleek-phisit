@@ -36,7 +36,7 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
   if (unlocked) return <>{children}</>
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 bg-surface-DEFAULT">
+    <div className="min-h-[100svh] flex items-center justify-center px-6 bg-surface-DEFAULT">
       {/* background grid */}
       <div
         className="fixed inset-0 opacity-[0.04] pointer-events-none"
